@@ -7,6 +7,7 @@ l <- readRDS("./data/l.RData")
 
 din <- function(txt_freqs, corpus_freqs) {
   joined <- left_join(txt_freqs, corpus_freqs, by = "key")
+  joined$rel_fq_refc[is.na(joined$rel_fq_refc)] <- 0
   joined$din <- with(joined, 100 * (rel_fq_txt - rel_fq_refc) / (rel_fq_txt + rel_fq_refc))
   return(joined[order(-joined$din), ])
 }
