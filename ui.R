@@ -17,12 +17,15 @@ shinyUI(fluidPage(
   # Application title
   titlePanel("KWords for Polish"),
 
-  tabsetPanel(
-    tabPanel("Vstupní data",
-             p("Vložte text:"),
-             inputTextarea("txt", "")),
+  mainPanel(
+    tabsetPanel(
+      tabPanel("Vstupní data",
+               p("Vložte text:"),
+               inputTextarea("txt", "")),
 
-    tabPanel("Výsledek Klíčová slova (word frequencies)",
-             dataTableOutput("kwords_w"))
+      tabPanel("Výsledek Klíčová slova (word frequencies)",
+               dataTableOutput("kwords_w"))
+    )
   )
+
 ))
