@@ -1,6 +1,8 @@
 library(dplyr)
 library(tidyr)
 
+source("nlp_lib.R")
+
 N <- list(
   araneum_polonicum_minus = 109947123
 )
@@ -9,7 +11,7 @@ read_word_list <- function(file) {
   df <- tbl_df(read.csv2(file, as.is = TRUE, header = FALSE))
   names(df) <- c("id", "key", "n")
   # df$key <- factor(tolower(df$key))
-  df$key <- tolower(df$key)
+  df$key <- normalize(df$key)
   df <- select(df, key, n) %>%
     group_by(key) %>%
     summarise(rel_fq_refc = sum(n) * 1e6 / N$araneum_polonicum_minus)
