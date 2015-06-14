@@ -2,10 +2,11 @@ library(dplyr)
 library(stringi)
 
 normalize <- function(string, lc = TRUE) {
-  if(lc) tolower(string) else string %>%
-    # remove soft hyphens
-    gsub("\U00AD", "", x = .) %>%
+  # remove soft hyphens
+  string <- gsub("\U00AD", "", string) %>%
+    # NFC normalize
     stri_trans_nfc()
+  if(lc) tolower(string) else string
 }
 
 tokenize <- function(string, lc = TRUE) {
@@ -19,5 +20,5 @@ rel_freqs <- function(tokens) {
   data.frame(key = tokens, stringsAsFactors = FALSE) %>%
     tbl_df %>%
     group_by(key) %>%
-    summarise(rel_fq_txt = n() / N)
+    summarise(rel_fq_txt = n() * 1e6 / N)
 }
