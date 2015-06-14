@@ -11,10 +11,17 @@ din <- function(txt_freqs, corpus_freqs) {
   return(joined[order(-joined$din), ])
 }
 
+log <- function(throwaway, call) {
+  call
+}
+
 din_w_from_text <- function(txt) {
-  txt %>%
-    tokenize() %>%
-    rel_freqs() %>%
+  txt %T>%
+    log(setProgress(1/3, "Provádím tokenizaci...")) %>%
+    tokenize() %T>%
+    log(setProgress(2/3, "Počítám relativní frekvence v textu...")) %>%
+    rel_freqs() %T>%
+    log(setProgress(1, "Počítám DIN...")) %>%
     din(w)
 }
 # t <- tokenize("być być jestem i i i Być Jestem i Ładnie")
