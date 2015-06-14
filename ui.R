@@ -23,7 +23,8 @@ shinyUI(fluidPage(
                p("Vložte text:"),
                inputTextarea("txt", "")),
 
-      tabPanel("Výsledek Klíčová slova (word frequencies)",
+      tabPanel("Klíčová slova",
+               tags$br(),
                dataTableOutput("kwords_w"))
     )
   )
