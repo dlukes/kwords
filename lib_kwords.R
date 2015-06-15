@@ -38,10 +38,18 @@ din_from_text <- function(txt, hide_nonword = TRUE, word_or_lemma = "w") {
 
   if (hide_nonword) {
     setProgress(.9, "Odstraňuji z výsledků číslice a interpunkci...")
-    return(remove_nonwords(din_tbl))
-  } else {
-    return(din_tbl)
+    din_tbl <- remove_nonwords(din_tbl)
   }
+
+  if (word_or_lemma == "w") {
+      names(din_tbl) <- c("lemma", "i.p.m. v textu", "i.p.m. v ref. korpusu",
+                          "DIN")
+  } else {
+      names(din_tbl) <- c("slovní tvar", "i.p.m. v textu", "i.p.m. v ref. korpusu",
+                          "DIN")
+  }
+
+  return(din_tbl)
 }
 
 # t <- "być być jestem i i i Być Jestem i Ładnie"
