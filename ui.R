@@ -8,6 +8,13 @@ inputTextarea <- function(inputId, value = "") {
              as.character(value)))
 }
 
+sidebarPanelWithLogo <- function (..., width = 4)  {
+  div(class = paste0("col-sm-", width),
+      tags$form(class = "well",  ...),
+      img(src = "https://trnka.korpus.cz/index-doc/logo/CNK-sirka-01-col-RGB.png",
+          width = "66%"))
+}
+
 shinyUI(fluidPage(
   tags$head(
     tags$link(rel = "stylesheet", type = "text/css", href = "kwords.css")),
@@ -15,12 +22,12 @@ shinyUI(fluidPage(
   # Application title
   titlePanel("KWords / polština"),
 
-  sidebarPanel(radioButtons("word_or_lemma",
-                            "Vyhodnotit na základě frekvencí:",
-                            c("lemmat" = "l", "slov" = "w")),
-               checkboxInput("hide_nonword",
-                             "Nezobrazovat číslice a interpunkci",
-                             value = TRUE)),
+  sidebarPanelWithLogo(radioButtons("word_or_lemma",
+                                    "Vyhodnotit na základě frekvencí:",
+                                    c("lemmat" = "l", "slov" = "w")),
+                       checkboxInput("hide_nonword",
+                                     "Nezobrazovat číslice a interpunkci",
+                                     value = TRUE)),
 
   mainPanel(
     tabsetPanel(
