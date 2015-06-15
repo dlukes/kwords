@@ -37,7 +37,7 @@ din_from_text <- function(txt, hide_nonword = TRUE, word_or_lemma = "w") {
     din(refc[[word_or_lemma]])
 
   if (hide_nonword) {
-    setProgress(.9, "Odstraňuji z textu číslice a interpunkci...")
+    setProgress(.9, "Odstraňuji z výsledků číslice a interpunkci...")
     return(remove_nonwords(din_tbl))
   } else {
     return(din_tbl)
