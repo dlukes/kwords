@@ -2,7 +2,7 @@ library(shiny)
 
 inputTextarea <- function(inputId, value = "") {
   tagList(
-    singleton(tags$head(tags$script(src = "www/textarea.js"))),
+    singleton(tags$head(tags$script(src = "textarea.js"))),
     tags$textarea(id = inputId,
              class = "inputtextarea",
              as.character(value)))
@@ -19,8 +19,8 @@ shinyUI(fluidPage(
                radioButtons("word_or_lemma",
                             "Vyhodnotit na základě frekvencí:",
                             c("slov" = "w", "lemmat" = "l")),
-               checkboxInput("ignore_nonword",
-                             "Ignorovat číslice a interpunkci",
+               checkboxInput("hide_nonword",
+                             "Nezobrazovat číslice a interpunkci",
                              value = TRUE)),
 
   mainPanel(

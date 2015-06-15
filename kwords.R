@@ -17,14 +17,31 @@ log <- function(throwaway, call) {
   call
 }
 
-din_from_text <- function(txt, ignore_nonword, word_or_lemma) {
-  txt %T>%
-    log(setProgress(1/3, "Provádím tokenizaci...")) %>%
-    tokenize(ignore_nonword = ignore_nonword) %T>%
-    log(setProgress(2/3, "Počítám relativní frekvence v textu...")) %>%
-    rel_freqs() %T>%
-    log(setProgress(1, "Počítám DIN...")) %>%
-    din(refc[[word_or_lemma]])
+remove_nonwords <- function(din_tbl) {
+  din_tbl[!grepl("^[[:punct:][:digit:]]+$", din_tbl$key), ]
 }
-# t <- tokenize("być być jestem i i i Być Jestem i Ładnie")
-# f <- rel_freqs(t)
+
+din_from_text <- function(txt, hide_nonword = TRUE, word_or_lemma = "w") {
+  if (word_or_lemma == "w") {
+    setProgress(1/4, "Provádím tokenizaci...")
+    tokens <- tokenize(txt)
+  } else {
+    setProgress(1/4, "Provádím tokenizaci a lemmatizaci...")
+    tokens <- to_lemmas(txt)
+  }
+
+  din_tbl <- tokens %T>%
+    log(setProgress(1/2, "Počítám relativní frekvence v textu...")) %>%
+    rel_freqs() %T>%
+    log(setProgress(2/3, "Počítám DIN...")) %>%
+    din(refc[[word_or_lemma]])
+
+  if (hide_nonword) {
+    setProgress(.9, "Odstraňuji z textu číslice a interpunkci...")
+    return(remove_nonwords(din_tbl))
+  } else {
+    return(din_tbl)
+  }
+}
+
+# t <- "być być jestem i i i Być Jestem i Ładnie"
