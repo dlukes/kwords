@@ -15,10 +15,9 @@ shinyUI(fluidPage(
   # Application title
   titlePanel("KWords / polština"),
 
-  sidebarPanel("Nastavení",
-               radioButtons("word_or_lemma",
+  sidebarPanel(radioButtons("word_or_lemma",
                             "Vyhodnotit na základě frekvencí:",
-                            c("slov" = "w", "lemmat" = "l")),
+                            c("lemmat" = "l", "slov" = "w")),
                checkboxInput("hide_nonword",
                              "Nezobrazovat číslice a interpunkci",
                              value = TRUE)),
@@ -26,7 +25,8 @@ shinyUI(fluidPage(
   mainPanel(
     tabsetPanel(
       tabPanel("Vstupní data",
-               p("Vložte text:"),
+               tags$br(),
+               p("Vložte text a přepněte na záložku", em("Klíčová slova"), ":"),
                inputTextarea("txt", "")),
 
       tabPanel("Klíčová slova",
