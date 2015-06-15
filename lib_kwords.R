@@ -42,10 +42,10 @@ din_from_text <- function(txt, hide_nonword = TRUE, word_or_lemma = "w") {
   }
 
   if (word_or_lemma == "w") {
-      names(din_tbl) <- c("lemma", "i.p.m. v textu", "i.p.m. v ref. korpusu",
+      names(din_tbl) <- c("slovní tvar", "i.p.m. v textu", "i.p.m. v ref. korpusu",
                           "DIN")
   } else {
-      names(din_tbl) <- c("slovní tvar", "i.p.m. v textu", "i.p.m. v ref. korpusu",
+      names(din_tbl) <- c("lemma", "i.p.m. v textu", "i.p.m. v ref. korpusu",
                           "DIN")
   }
 

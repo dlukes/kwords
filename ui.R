@@ -24,7 +24,8 @@ shinyUI(fluidPage(
 
   sidebarPanelWithLogo(radioButtons("word_or_lemma",
                                     "Vyhodnotit na základě frekvencí:",
-                                    c("lemmat" = "l", "slov" = "w")),
+                                    c("lemmat (pomalejší)" = "l",
+                                      "slovních tvarů" = "w")),
                        checkboxInput("hide_nonword",
                                      "Nezobrazovat číslice a interpunkci",
                                      value = TRUE)),
