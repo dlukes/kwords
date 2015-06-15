@@ -19,7 +19,6 @@ shinyUI(fluidPage(
   tags$head(
     tags$link(rel = "stylesheet", type = "text/css", href = "kwords.css")),
 
-  # Application title
   titlePanel("KWords / polština"),
 
   sidebarPanelWithLogo(radioButtons("word_or_lemma",
@@ -39,6 +38,12 @@ shinyUI(fluidPage(
 
       tabPanel("Klíčová slova",
                tags$br(),
-               dataTableOutput("kwords_w"))))
+               dataTableOutput("kwords_w")))),
+
+      tabPanel("Nápověda",
+               tags$br(),
+               p("Viz nápověda k původní aplikaci KWords na",
+                 a(href = "http://wiki.korpus.cz/doku.php/manualy:kwords",
+                   "wiki ÚČNK.")))
 
 ))
