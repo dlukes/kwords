@@ -1,6 +1,6 @@
 library(dplyr)
 
-source("nlp_lib.R")
+source("lib_nlp.R")
 
 refc <- list(
   w = readRDS("./data/w.RData"),

@@ -1,7 +1,7 @@
 library(dplyr)
 library(tidyr)
 
-source("nlp_lib.R")
+source("lib_nlp.R")
 
 N <- list(
   araneum_polonicum_minus = 109947123
