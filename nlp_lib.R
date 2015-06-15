@@ -1,4 +1,5 @@
 library(dplyr)
+library(pryr)
 library(stringi)
 
 normalize <- function(string, lc = TRUE) {
@@ -9,9 +10,16 @@ normalize <- function(string, lc = TRUE) {
   if(lc) tolower(string) else string
 }
 
-tokenize <- function(string, lc = TRUE) {
-  strsplit(normalize(string, lc),
-           "[[:punct:]]*\\s+|^[[:punct:]]+|[[:punct:]]+$")
+tokenize <- function(string, lc = TRUE, ignore_nonword = TRUE) {
+  tokens <- strsplit(normalize(string, lc),
+                     "[[:punct:]]*\\s+|^[[:punct:]]+|[[:punct:]]+$")
+  if (ignore_nonword) {
+    return(lapply(tokens,
+                  partial(Filter,
+                          Negate(partial(grepl, "[[:punct:][:digit:]]")))))
+  } else {
+    return(tokens)
+  }
 }
 
 rel_freqs <- function(tokens) {

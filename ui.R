@@ -5,17 +5,23 @@ inputTextarea <- function(inputId, value = "") {
     singleton(tags$head(tags$script(src = "www/textarea.js"))),
     tags$textarea(id = inputId,
              class = "inputtextarea",
-             as.character(value))
-  )
+             as.character(value)))
 }
 
 shinyUI(fluidPage(
   tags$head(
-    tags$link(rel = "stylesheet", type = "text/css", href = "kwords.css")
-  ),
+    tags$link(rel = "stylesheet", type = "text/css", href = "kwords.css")),
 
   # Application title
-  titlePanel("KWords for Polish"),
+  titlePanel("KWords / polština"),
+
+  sidebarPanel("Nastavení",
+               radioButtons("word_or_lemma",
+                            "Vyhodnotit na základě frekvencí:",
+                            c("slov" = "w", "lemmat" = "l")),
+               checkboxInput("ignore_nonword",
+                             "Ignorovat číslice a interpunkci",
+                             value = TRUE)),
 
   mainPanel(
     tabsetPanel(
@@ -25,8 +31,6 @@ shinyUI(fluidPage(
 
       tabPanel("Klíčová slova",
                tags$br(),
-               dataTableOutput("kwords_w"))
-    )
-  )
+               dataTableOutput("kwords_w"))))
 
 ))
