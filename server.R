@@ -1,6 +1,6 @@
 library(shiny)
 
-source("kwords.R")
+source("lib_kwords.R")
 
 shinyServer(function(input, output) {
 
