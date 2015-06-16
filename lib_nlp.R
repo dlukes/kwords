@@ -29,15 +29,14 @@ rel_freqs <- function(tokens) {
 
 segment <- function(string) {
   string <- gsub("([,.\\?!:])\\s+", "\\1</s>\n<s>", string)
-  paste0("<s>", string, "</s>")
+  stri_trans_nfc(paste0("<s>", string, "</s>"))
 }
 
 to_lemmas <- function(string) {
   tmp <- "kwords_takipi_tag"
-  tmp2 <- "kwords_takipi_tag"
   sink(tmp)
   cat(segment(string))
   sink()
-  system(paste("./bin/to_lemmas.sh", tmp2))
-  tolower(readLines(paste0(tmp2, ".out"), encoding = "UTF-8"))
+  system(paste("./bin/to_lemmas.sh", tmp))
+  tolower(readLines(paste0(tmp, ".out"), encoding = "UTF-8"))
 }
