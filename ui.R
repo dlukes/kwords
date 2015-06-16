@@ -17,7 +17,7 @@ sidebarPanelWithLogo <- function (..., width = 4)  {
 
 shinyUI(fluidPage(
   tags$head(
-    tags$link(rel = "shortcut icon", href = "favicon.ico")
+    tags$link(rel = "shortcut icon", href = "favicon.ico"),
     tags$link(rel = "stylesheet", type = "text/css", href = "kwords.css")),
 
   titlePanel("KWords.pl"),
