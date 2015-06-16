@@ -39,5 +39,5 @@ to_lemmas <- function(string) {
   cat(segment(string))
   sink()
   system(paste("./bin/to_lemmas.sh", tmp2))
-  readLines(paste0(tmp2, ".out"), encoding = "UTF-8")
+  tolower(readLines(paste0(tmp2, ".out"), encoding = "UTF-8"))
 }
