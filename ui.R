@@ -17,9 +17,10 @@ sidebarPanelWithLogo <- function (..., width = 4)  {
 
 shinyUI(fluidPage(
   tags$head(
+    tags$link(rel = "shortcut icon", href = "favicon.ico")
     tags$link(rel = "stylesheet", type = "text/css", href = "kwords.css")),
 
-  titlePanel("KWords / polština"),
+  titlePanel("KWords.pl"),
 
   sidebarPanelWithLogo(radioButtons("word_or_lemma",
                                     "Vyhodnotit na základě frekvencí:",
