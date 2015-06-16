@@ -16,4 +16,4 @@
 export LD_LIBRARY_PATH="$HOME/.local/lib"
 
 /home/lukes/.local/bin/takipi -old -i "$1" -o "$1.out"
-perl -i -CSAD -nle 'print $1 if /<lex disamb.*?<base>(.*?)<\/base>/' "$1.out"
+perl -i -CSAD -MHTML::Entities -nle 'print decode_entities($1) if /<lex disamb.*?<base>(.*?)<\/base>/' "$1.out"
