@@ -39,12 +39,19 @@ shinyUI(fluidPage(
 
       tabPanel("Klíčová slova",
                tags$br(),
-               dataTableOutput("kwords_w")))),
+               dataTableOutput("kwords_w")),
 
       tabPanel("Nápověda",
                tags$br(),
                p("Viz nápověda k původní aplikaci KWords na",
                  a(href = "http://wiki.korpus.cz/doku.php/manualy:kwords",
-                   "wiki ÚČNK.")))
+                   target = "_blank",
+                   "wiki ÚČNK."),
+                 "Jako referenční korpus pro vyhodnocení klíčovosti slov je zde
+                 použit korpus",
+                 a(href = "http://sketch.juls.savba.sk/aranea_about/index.html",
+                   target = "_blank",
+                   "Araneum Polonicum Minus"),
+                 "od Vlada Benka z JÚĽŠ SAV."))))
 
 ))
