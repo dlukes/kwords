@@ -39,6 +39,8 @@ shinyUI(fluidPage(
 
       tabPanel("Klíčová slova",
                tags$br(),
+               downloadButton("download_csv", "Stáhnout tabulku"),
+               tags$br(),
                dataTableOutput("kwords_w")),
 
       tabPanel("Nápověda",

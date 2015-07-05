@@ -4,7 +4,7 @@ source("lib_kwords.R")
 
 shinyServer(function(input, output) {
 
-  output$kwords_w <- renderDataTable({
+  kwords_df <- reactive({
     if (nchar(input$txt) > 0) {
       withProgress(din_from_text(input$txt,
                                  input$hide_nonword,
@@ -13,5 +13,16 @@ shinyServer(function(input, output) {
                    value = 0)
     }
   })
+
+  output$kwords_w <- renderDataTable({
+    kwords_df()
+  })
+
+  output$download_csv <- downloadHandler(
+                           filename = "kwords.csv",
+                           content = function(file) {
+                             write.csv(kwords_df(), file, row.names = FALSE)
+                           }
+                         )
 
 })
