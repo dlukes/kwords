@@ -24,7 +24,7 @@ shinyUI(fluidPage(
 
   sidebarPanelWithLogo(radioButtons("word_or_lemma",
                                     "Vyhodnotit na základě frekvencí:",
-                                    c("lemmat (pomalejší)" = "l",
+                                    c("lemmat (napoprvé pomalejší)" = "l",
                                       "slovních tvarů" = "w")),
                        checkboxInput("hide_nonword",
                                      "Nezobrazovat číslice a interpunkci",
@@ -40,6 +40,7 @@ shinyUI(fluidPage(
       tabPanel("Klíčová slova",
                tags$br(),
                downloadButton("download_csv", "Stáhnout tabulku"),
+               tags$br(),
                tags$br(),
                dataTableOutput("kwords_w")),
 
