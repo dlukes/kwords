@@ -1,5 +1,6 @@
 library(dplyr)
 library(stringi)
+library(digest)
 
 normalize <- function(string, lc = TRUE) {
   # remove soft hyphens
@@ -33,10 +34,14 @@ segment <- function(string) {
 }
 
 to_lemmas <- function(string) {
-  tmp <- "kwords_takipi_tag"
-  sink(tmp)
-  cat(segment(string))
-  sink()
-  system(paste("./bin/to_lemmas.sh", tmp))
-  tolower(readLines(paste0(tmp, ".out"), encoding = "UTF-8"))
+  tmp <- paste0("cache/kwords_takipi_tag.", digest(string))
+  out <- paste0(tmp, ".out")
+  if (!file.exists(out)) {
+    sink(tmp)
+    cat(segment(string))
+    sink()
+    system(paste("./bin/to_lemmas.sh", tmp))
+    unlink(tmp)
+  }
+  tolower(readLines(out, encoding = "UTF-8"))
 }
