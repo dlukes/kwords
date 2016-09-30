@@ -23,29 +23,29 @@ remove_nonwords <- function(din_tbl) {
 
 din_from_text <- function(txt, hide_nonword = TRUE, word_or_lemma = "w") {
   if (word_or_lemma == "w") {
-    setProgress(1/4, "Provádím tokenizaci...")
+    setProgress(1/4, "Tokenizing...")
     tokens <- tokenize(txt)
   } else {
-    setProgress(1/4, "Provádím tokenizaci a lemmatizaci...")
+    setProgress(1/4, "Tokenizing and lemmatizing...")
     tokens <- to_lemmas(txt)
   }
 
   din_tbl <- tokens %T>%
-    log(setProgress(1/2, "Počítám relativní frekvence v textu...")) %>%
+    log(setProgress(1/2, "Computing relative frequencies in text...")) %>%
     rel_freqs() %T>%
-    log(setProgress(2/3, "Počítám DIN...")) %>%
+    log(setProgress(2/3, "Computing DIN...")) %>%
     din(refc[[word_or_lemma]])
 
   if (hide_nonword) {
-    setProgress(.9, "Odstraňuji z výsledků číslice a interpunkci...")
+    setProgress(.9, "Removing numbers and punctuation from results...")
     din_tbl <- remove_nonwords(din_tbl)
   }
 
   if (word_or_lemma == "w") {
-      names(din_tbl) <- c("slovní tvar", "i.p.m. v textu", "i.p.m. v ref. korpusu",
+      names(din_tbl) <- c("word form", "i.p.m. in text", "i.p.m. in ref. corpus",
                           "DIN")
   } else {
-      names(din_tbl) <- c("lemma", "i.p.m. v textu", "i.p.m. v ref. korpusu",
+      names(din_tbl) <- c("lemma", "i.p.m. in text", "i.p.m. in ref. corpus",
                           "DIN")
   }
 
