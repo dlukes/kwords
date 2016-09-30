@@ -11,7 +11,7 @@ inputTextarea <- function(inputId, value = "") {
 sidebarPanelWithLogo <- function (..., width = 4)  {
   div(class = paste0("col-sm-", width),
       tags$form(class = "well",  ...),
-      img(src = "https://trnka.korpus.cz/index-doc/logo/CNK-sirka-01-col-RGB.png",
+      img(src = "https://trnka.korpus.cz/index-doc/logo/CNC-sirka-01-col-RGB.png",
           width = "66%"))
 }
 
@@ -23,38 +23,37 @@ shinyUI(fluidPage(
   titlePanel("KWords.pl"),
 
   sidebarPanelWithLogo(radioButtons("word_or_lemma",
-                                    "Vyhodnotit na základě frekvencí:",
-                                    c("lemmat (napoprvé pomalejší)" = "l",
-                                      "slovních tvarů" = "w")),
+                                    "Estimate keywords based on:",
+                                    c("lemma frequencies (first run slower because of lemmatization)" = "l",
+                                      "word form frequencies" = "w")),
                        checkboxInput("hide_nonword",
-                                     "Nezobrazovat číslice a interpunkci",
+                                     "Hide numbers and punctuation",
                                      value = TRUE)),
 
   mainPanel(
     tabsetPanel(
-      tabPanel("Vstupní data",
+      tabPanel("Input data",
                tags$br(),
-               p("Vložte text a přepněte na záložku", em("Klíčová slova"), ":"),
+               p("Paste input text and switch to the", em("Keywords"), "tab:"),
                inputTextarea("txt", "")),
 
-      tabPanel("Klíčová slova",
+      tabPanel("Keywords",
                tags$br(),
-               downloadButton("download_csv", "Stáhnout tabulku"),
+               downloadButton("download_csv", "Download as .csv"),
                tags$br(),
                tags$br(),
                dataTableOutput("kwords_w")),
 
-      tabPanel("Nápověda",
+      tabPanel("Help",
                tags$br(),
-               p("Viz nápověda k původní aplikaci KWords na",
+               p("See help for the original KWords app on the",
                  a(href = "http://wiki.korpus.cz/doku.php/manualy:kwords",
                    target = "_blank",
-                   "wiki ÚČNK."),
-                 "Jako referenční korpus pro vyhodnocení klíčovosti slov je zde
-                 použit korpus",
+                   "CNC wiki."),
+                 "The reference frequency figures against which the keyness of words in the input text is estimated are taken from the",
                  a(href = "http://sketch.juls.savba.sk/aranea_about/index.html",
                    target = "_blank",
                    "Araneum Polonicum Minus"),
-                 "od Vlada Benka z JÚĽŠ SAV."))))
+                 "corpus, compiled by Vlado Benko (JÚĽŠ SAV)."))))
 
 ))
