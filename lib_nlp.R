@@ -38,7 +38,7 @@ to_lemmas <- function(string) {
   out <- paste0(tmp, ".out")
   if (!file.exists(out)) {
     writeLines(segment(string), tmp)
-    system(paste("./bin/to_lemmas.sh", tmp))
+    system(paste("./bin/to_lemmas.py", tmp))
     unlink(tmp)
   }
   tolower(readLines(out, encoding = "UTF-8"))
